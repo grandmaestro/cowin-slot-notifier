@@ -57,8 +57,8 @@ const sendWhatsappNotif = async (body, number) => {
 
 }
 
-const init = async() => {
-  // setInterval(async () => {
+const init = () => {
+  setInterval(async () => {
     try {
       const availablecenters = await findSlot();
       if (availablecenters.length) {
@@ -69,7 +69,7 @@ const init = async() => {
     } catch (e) {
       console.error(e);
     }
-  // }, process.env.FREQUENCY);
+  }, process.env.FREQUENCY);
 }
 
 
