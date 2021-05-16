@@ -63,7 +63,7 @@ const sendWhatsappNotif = async (body, number) => {
 
 const init = () => {
   setInterval(async () => {
-    console.log('Waking up the thread to find slot');
+    console.log(moment().format('DD-MM-YYYY hh:mm:ss A'), ':: Waking up the thread to find slot');
     try {
       const availablecenters = await findSlot();
       if (availablecenters.length) {
