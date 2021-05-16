@@ -8,6 +8,7 @@ dotenv.config();
 const PINCODE = process.env.PINCODE;
 
 const findSlot = async () => {
+  console.log('Hitting the Cowin portal API');
   const date = moment().format('DD-MM-YYYY');
   const response = await axios.get(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${PINCODE}&date=${date}`, {
     headers: {
@@ -24,10 +25,12 @@ const findSlot = async () => {
       availablecenters.push(center);
     }
   });
+  console.log(`Filtered ${availablecenters.length} available centers`);
   return availablecenters;
 }
 
 const createMessageBody = (centers) => {
+  console.log('Creating message body');
   let body = `Co-Win Vaccine Slots are available for pincode: ${PINCODE} \n`;
   centers.forEach(center => {
     const dates = center.matchedSession.reduce((acc, next) => {
@@ -40,6 +43,7 @@ const createMessageBody = (centers) => {
 }
 
 const sendWhatsappNotif = async (body, number) => {
+  console.log(`Sending Whatsapp notif to ${number} `);
   const response = await axios.post(`https://api.twilio.com/2010-04-01/Accounts/${process.env.TWILIO_ACCOUNT_SID}/Messages.json`, qs.stringify({
     To: `whatsapp:${number}`,
     From: `whatsapp:${process.env.FROM_TW_WHATSAPP}`,
@@ -59,6 +63,7 @@ const sendWhatsappNotif = async (body, number) => {
 
 const init = () => {
   setInterval(async () => {
+    console.log('Waking up the thread to find slot');
     try {
       const availablecenters = await findSlot();
       if (availablecenters.length) {
