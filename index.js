@@ -57,19 +57,19 @@ const sendWhatsappNotif = async (body, number) => {
 
 }
 
-const init = () => {
-  setInterval(async () => {
+const init = async() => {
+  // setInterval(async () => {
     try {
       const availablecenters = await findSlot();
       if (availablecenters.length) {
         const message = createMessageBody(availablecenters);
         await sendWhatsappNotif(message, process.env.PRIMARY_NUMBER);
-        // await sendWhatsappNotif(message, process.env.SECONDARY_NUMBER);
+        await sendWhatsappNotif(message, process.env.SECONDARY_NUMBER);
       }
     } catch (e) {
       console.error(e);
     }
-  }, process.env.FREQUENCY);
+  // }, process.env.FREQUENCY);
 }
 
 
