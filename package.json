@@ -1,0 +1,22 @@
+{
+  "name": "cowin-slot-whatsapp-notifier",
+  "version": "1.0.0",
+  "description": "Whatsapp notifier for finding cowin vaccine slots",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cowin",
+    "vaccine",
+    "slot"
+  ],
+  "author": "vaibhav1992.gupta@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^9.0.2",
+    "moment": "^2.29.1",
+    "twilio": "^3.62.0"
+  }
+}
